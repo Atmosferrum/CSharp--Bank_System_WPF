@@ -15,14 +15,13 @@ namespace Bank_System
 
         public static void CreateBank()
         {
-            Bronze<Client> bronze = new Bronze<Client>("Common people solutions");
-            Silver<Client> silver = new Silver<Client>("Aristocracy Solutions");
-            Gold<Client> gold = new Gold<Client>("Royal Solutions");
+            Bronze<Common> bronze = new Bronze<Common>("Common people solutions");
+            Silver<Aristocrat> silver = new Silver<Aristocrat>("Aristocracy Solutions");
+            Gold<Royal> gold = new Gold<Royal>("Royal Solutions");
 
             Common common1 = new Common("Common", "Man", 10, 1, 10, DateTime.Now);
             Aristocrat aristocrat1 = new Aristocrat("Common", "Man", 10, 1, 10, DateTime.Now);
             Royal royal1 = new Royal("Common", "Man", 10, 1, 10, DateTime.Now);
-
 
             departments.Add(bronze);
             departments.Add(silver);

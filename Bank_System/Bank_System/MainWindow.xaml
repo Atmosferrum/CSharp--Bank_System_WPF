@@ -19,6 +19,7 @@
         <ListView x:Name="LV_Clients" Margin="10" Grid.Column="1" Grid.RowSpan="2">
             <ListView.View>
                 <GridView>
+                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="Auto"/>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="Auto"/>
                     <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding LastName}" Width="Auto"/>
                     <GridViewColumn Header="Deposit" DisplayMemberBinding="{Binding Deposit,StringFormat={}{0} $}" Width="Auto"/>

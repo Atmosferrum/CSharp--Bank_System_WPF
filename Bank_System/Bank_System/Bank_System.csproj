@@ -63,6 +63,7 @@
     <Compile Include="Departments\Bronze.cs" />
     <Compile Include="Departments\Department.cs" />
     <Compile Include="Departments\Gold.cs" />
+    <Compile Include="Departments\ICollection.cs" />
     <Compile Include="Departments\Silver.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

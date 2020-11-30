@@ -23,6 +23,10 @@ namespace Bank_System
         public MainWindow()
         {
             InitializeComponent();
+
+            Bank.CreateBank();
+
+            TV_Departments.ItemsSource = Bank.departments;
         }
 
         private void TV_Departments_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)

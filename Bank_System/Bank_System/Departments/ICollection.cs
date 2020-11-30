@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace Bank_System
 {
-    class Gold<T> : Department
-        where T : Royal
+    interface ICollection<T>
     {
-        public Gold(string Name)
-               : base(Name)
-        {
-
-        }
+        T this[int index] { get; set; }
+        void Add(T item);        
+        void Clear();
+        void Remove(T item);
     }
 }

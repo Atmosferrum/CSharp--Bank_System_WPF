@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Bank_System
 {
     class Silver<T> : Department
+        where T : Aristocrat
     {
         public Silver(string Name)
                : base(Name)
