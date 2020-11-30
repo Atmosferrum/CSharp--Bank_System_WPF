@@ -8,7 +8,6 @@ namespace Bank_System
 {
     class Department
     {
-
         #region Constructor;
 
         public Department(string Name)
