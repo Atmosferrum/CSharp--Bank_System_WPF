@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bank_System
 {
-    class Bronze<T> : Department, ICollection<T>
+    class Bronze<T> : Department, ICollection<T>, IEnumerable<Common>
         where T : Common
     {
         T[] items;
@@ -38,8 +39,14 @@ namespace Bank_System
 
         public void Add(T item)
         {
+            ResizeArray();
             this.items[size] = item;
             this.size++;
+        }
+
+        private void ResizeArray()
+        {
+            Array.Resize(ref this.items, this.size == 0 ? 4 : this.items.Length * 2);
         }
 
         public void Clear()
@@ -53,6 +60,11 @@ namespace Bank_System
             T[] temp = new T[size];
 
             this.items = temp;
+        }
+
+        public IEnumerator<Common> GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
 
         public void Remove(T item)
@@ -75,6 +87,11 @@ namespace Bank_System
             }
 
             items[size] = null;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.items.GetEnumerator();
         }
     }
 }

@@ -11,6 +11,8 @@ namespace Bank_System
     {
         public static ObservableCollection<Department> departments = new ObservableCollection<Department>();
 
+        //public static List<Client> clients = new List<Client>();
+
         public const string bankName = "Vivaldi Bank";
 
         public static void CreateBank()
@@ -26,6 +28,8 @@ namespace Bank_System
             departments.Add(bronze);
             departments.Add(silver);
             departments.Add(gold);
+
+            bronze.Add(common1);
 
         }
     }

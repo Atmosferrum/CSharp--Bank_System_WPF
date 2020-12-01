@@ -24,6 +24,7 @@
                     <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding LastName}" Width="Auto"/>
                     <GridViewColumn Header="Deposit" DisplayMemberBinding="{Binding Deposit,StringFormat={}{0} $}" Width="Auto"/>
                     <GridViewColumn Header="Percent" DisplayMemberBinding="{Binding Percent,StringFormat={}{0} %}" Width="Auto"/>
+                    <GridViewColumn Header="Accumulation" DisplayMemberBinding="{Binding Accumulation,StringFormat={}{0} $}" Width="Auto"/>
                     <GridViewColumn Header="DateOfDeposit" DisplayMemberBinding="{Binding Date,StringFormat={}{0}}" Width="Auto"/>
                 </GridView>
             </ListView.View>
@@ -35,7 +36,7 @@
 
                 <TreeView x:Name="TV_Departments" SelectedItemChanged="TV_Departments_SelectedItemChanged">
                     <TreeView.ItemTemplate>
-                        <HierarchicalDataTemplate ItemsSource="{Binding Path=innerDepartments}">
+                        <HierarchicalDataTemplate ItemsSource="{Binding Path=departments}">
                             <TextBlock Text="{Binding Name}" />
                         </HierarchicalDataTemplate>
                     </TreeView.ItemTemplate>
