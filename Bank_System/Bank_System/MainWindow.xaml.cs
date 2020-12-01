@@ -26,13 +26,12 @@ namespace Bank_System
 
             Bank.CreateBank();
 
-            TV_Departments.ItemsSource = Bank.departments;
-            
+            TV_Departments.ItemsSource = Bank.Departments;            
         }
 
         private void TV_Departments_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            LV_Clients.ItemsSource = TV_Departments.SelectedItem as Bronze<Common>;
+            LV_Clients.ItemsSource = TV_Departments.SelectedItem as Department<Client>;
         }
 
         private void BTN_Clients_AddClient(object sender, RoutedEventArgs e)

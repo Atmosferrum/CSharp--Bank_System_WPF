@@ -15,13 +15,11 @@ namespace Bank_System
                       string LastName,
                       int Deposit,
                       double Percent,
-                      int Accumulation,
                       DateTime DateOfDeposit)
             : base(Name,
                    LastName,
                    Deposit,
                    Percent,
-                   Accumulation,
                    DateOfDeposit)
         {
 

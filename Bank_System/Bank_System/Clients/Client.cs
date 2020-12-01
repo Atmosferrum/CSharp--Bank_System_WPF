@@ -14,21 +14,21 @@ namespace Bank_System
                       string LastName,
                       int Deposit,
                       double Percent,
-                      int Accumulation,
                       DateTime DateOfDeposit)
         {
             this.Name = Name;
             this.LastName = LastName;
             this.Deposit = Deposit;
             this.Percent = Percent;
-            this.Accumulation = Accumulation;
             this.DateOfDeposit = DateOfDeposit;
+            this.Status = this.GetType().Name;
         }
 
         #endregion Constructor
 
         #region Properties;
 
+        public string Status { get; private set; } //Property to GET or SET Status
         public string Name { get; set; } //Property to GET or SET Name
         public string LastName { get; set; } //Property to GET or SET LastName
         public int Deposit { get; set; } //Property to GET or SET Deposit
