@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bank_System
 {
-    class Silver<T> : Department
+    class Silver<T> : Department<Client>
         where T : Aristocrat
     {
         public Silver(string Name)
