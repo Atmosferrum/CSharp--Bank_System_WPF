@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,6 +48,9 @@ namespace Bank_System
             ResizeArray();
             this.items[size] = item;
             this.size++;
+
+            Debug.WriteLine(this.size);
+            Debug.WriteLine(this.items.Length);
         }
 
         private void ResizeArray()
@@ -69,7 +73,7 @@ namespace Bank_System
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return items.Take(size).GetEnumerator();
         }
 
         public void Remove(T item)
