@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -11,13 +12,17 @@ namespace Bank_System
 {
     class Department<T> : ICollection<T>, IEnumerable<T>
     {
-        public ObservableCollection<Department<Client>> Departments { get; set; }
+        public ObservableCollection<Department<Client>> Departments { get; set; } //Collection of inner Departments
 
-        protected T[] items;
-        protected int size;
+        protected T[] items; //Array of Items in this.Collection.Generic
+        protected int size; //Size of this.Colletion.Generic
 
         #region Constructor;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="Name"></param>
         public Department(string Name)
         {
             this.Name = Name;
@@ -25,6 +30,25 @@ namespace Bank_System
             this.size = 0;
             this.Departments = new ObservableCollection<Department<Client>>();
         }
+
+        #endregion Constructor
+
+        #region Properties;
+
+        /// <summary>
+        /// Property to GET Name
+        /// </summary>
+        public string Name { get; }
+
+        #endregion Properties
+
+        #region Indexers;
+
+        /// <summary>
+        /// Indexer by [i] = int
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public T this[int index]
         {
             get
@@ -41,23 +65,34 @@ namespace Bank_System
                 else
                     this.items[index] = value;
             }
-        }
+        } 
 
+        #endregion Indexers
+
+        /// <summary>
+        /// Method to ADD new Item in this.Collection.Generic
+        /// </summary>
+        /// <param name="item"></param>
         public void Add(T item)
         {
-            ResizeArray();
+            if(size >= items.Length)
+                ResizeArray();
+
             this.items[size] = item;
             this.size++;
-
-            Debug.WriteLine(this.size);
-            Debug.WriteLine(this.items.Length);
         }
 
+        /// <summary>
+        /// Method to Resize this.Collection.Generic
+        /// </summary>
         private void ResizeArray()
         {
-            Array.Resize(ref this.items, this.size == 0 ? 4 : this.items.Length * 2);
+            Array.Resize(ref this.items, size + 1);
         }
 
+        /// <summary>
+        /// Method to CLEAR this.Collection.Generic
+        /// </summary>
         public void Clear()
         {
             for (int i = 0; i < size; i++)
@@ -70,12 +105,11 @@ namespace Bank_System
 
             this.items = temp;
         }
-
-        public IEnumerator<T> GetEnumerator()
-        {
-            return items.Take(size).GetEnumerator();
-        }
-
+        
+        /// <summary>
+        /// Method to REMOVE Item from this.Collection.Generic
+        /// </summary>
+        /// <param name="item"></param>
         public void Remove(T item)
         {
             int tempI = 0;
@@ -98,18 +132,27 @@ namespace Bank_System
             items[size] = default(T);
         }
 
+
+        #region Interfaces;
+
+        /// <summary>
+        /// IEnumerator implementation
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerator<T> GetEnumerator()
+        {
+            return items.Take(size).GetEnumerator();
+        }
+
+        /// <summary>
+        /// IEnumerator implementation
+        /// </summary>
+        /// <returns></returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.items.GetEnumerator();
         }
 
-
-        #endregion Constructor
-
-        #region Properties;
-
-        public string Name { get; }
-
-        #endregion Properties
+        #endregion Interfaces       
     }
 }

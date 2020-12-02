@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +11,6 @@ namespace Bank_System
     static class Bank
     {
         public static ObservableCollection<Department<Client>> Departments = new ObservableCollection<Department<Client>>(); //Main Bank collection
-
-        public static List<int> test = new List<int>();
 
         public const string bankName = "Vivaldi Bank"; //Bank name
         public static readonly string[] departmentsNames = { "Common People Solutions", //Departments' names
@@ -94,31 +93,6 @@ namespace Bank_System
                 dateTime = DateRandomizer();
             }
 
-
-            //switch (x)
-            //{
-            //    case 0:
-            //        Departments[0].Departments[x].Add(new Common($"Name {clientRandom.Next(101)}",
-            //                                                         $"LastName {clientRandom.Next(101)}",
-            //                                                         clientRandom.Next(1000000),
-            //                                                         clientRandom.Next(10),
-            //                                                         DateRandomizer()));
-            //        break;
-            //    case 1:
-            //        Departments[0].Departments[x].Add(new Aristocrat($"Name {clientRandom.Next(101)}",
-            //                                                 $"LastName {clientRandom.Next(101)}",
-            //                                                 clientRandom.Next(1000000),
-            //                                                 clientRandom.Next(10),
-            //                                                 DateRandomizer()));
-            //        break;
-            //    default:
-            //        Departments[0].Departments[x].Add(new Royal($"Name {clientRandom.Next(101)}",
-            //                                                 $"LastName {clientRandom.Next(101)}",
-            //                                                 clientRandom.Next(1000000),
-            //                                                 clientRandom.Next(10),
-            //                                                 DateRandomizer()));
-            //        break;
-            //}
             switch (x)
             {
                 case 0:

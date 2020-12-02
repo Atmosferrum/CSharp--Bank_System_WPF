@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -29,19 +30,25 @@ namespace Bank_System
 
             Bank.CreateBank();
 
-            TV_Departments.ItemsSource = Bank.Departments;            
+            TV_Departments.ItemsSource = Bank.Departments;
         }
 
         private void TV_Departments_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            //LV_Clients.ItemsSource = TV_Departments.SelectedItem as Department<Client>;
             LoadClientsToLV();
         }
 
         private void BTN_Clients_AddClient(object sender, RoutedEventArgs e)
         {
-                AddClientWindow AddClientWindow = new AddClientWindow(this, Bank.Departments[0].Departments.IndexOf(TV_Departments?.SelectedItem as Department<Client>));
-                AddClientWindow.Show();
+            if (TV_Departments.SelectedItem != null)
+            {
+                if ((TV_Departments?.SelectedItem as Department<Client>).Name != Bank.bankName)
+                {
+                    AddClientWindow AddClientWindow = new AddClientWindow(this, Bank.Departments[0].Departments.IndexOf(TV_Departments?.SelectedItem as Department<Client>));
+                    AddClientWindow.Show();
+                }
+            }
+
         }
 
         private void BTN_Clients_EditClient(object sender, RoutedEventArgs e)
