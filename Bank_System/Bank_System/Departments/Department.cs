@@ -124,14 +124,13 @@ namespace Bank_System
                 }
             }
 
-            for (int i = tempI; i > size; i++)
+            for (int i = tempI; i < size; i++)
             {
                 items[i] = items[i + 1];
             }
 
             items[size] = default(T);
         }
-
 
         #region Interfaces;
 
