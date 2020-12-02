@@ -118,5 +118,15 @@ namespace Bank_System
                     break;
             }
         }            
+
+        /// <summary>
+        /// Method ot REMOVE Client
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="client"></param>
+        public static void RemoveClient(int x, Client client)
+        {
+            Departments[0].Departments[x].Remove(client);
+        }
     }
 }

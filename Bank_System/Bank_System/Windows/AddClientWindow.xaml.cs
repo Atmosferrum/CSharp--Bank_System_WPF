@@ -30,9 +30,6 @@ namespace Bank_System.Windows
         private int deposit; //Variable to get PARSED Deposit Data
         private double percent; //Variable to get PARSED Percent Data
 
-
-
-
         #region Constructor;
 
         /// <summary>
