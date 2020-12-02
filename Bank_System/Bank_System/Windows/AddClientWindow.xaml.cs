@@ -31,6 +31,8 @@ namespace Bank_System.Windows
         private double percent; //Variable to get PARSED Percent Data
 
 
+
+
         #region Constructor;
 
         /// <summary>
