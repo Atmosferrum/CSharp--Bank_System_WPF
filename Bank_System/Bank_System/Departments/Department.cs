@@ -65,7 +65,25 @@ namespace Bank_System
                 else
                     this.items[index] = value;
             }
-        } 
+        }
+
+        public Client this[string name, string lastName, int deposit, double percent, DateTime dateOfDeposit]
+        {
+            get
+            {
+                Client client = null;
+                foreach (var item in this.items)
+                {
+                    if ((item as Client).Name == name
+                     && (item as Client).LastName == lastName
+                     && (item as Client).Deposit == deposit
+                     && (item as Client).Percent == percent
+                     && (item as Client).DateOfDeposit == dateOfDeposit)
+                    { client = item as Client; break; }
+                }
+                return client;
+            }
+        }
 
         #endregion Indexers
 
@@ -130,6 +148,15 @@ namespace Bank_System
             }
 
             items[size] = default(T);
+        }
+
+        public void Edit(T oldItem, T newItem)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                if (items[i].Equals(oldItem))                
+                    items[i] = newItem;                
+            }
         }
 
         #region Interfaces;

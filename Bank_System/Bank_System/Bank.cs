@@ -117,7 +117,64 @@ namespace Bank_System
                                                                 dateTime));
                     break;
             }
-        }            
+        }
+
+        public static void EditClient(Client oldClient,
+                                      int clientClassIndex,
+                                      params string[] args)
+        {
+            Client newClient;
+
+            string name;
+            string lastName;
+            int deposit;
+            double percent;
+            DateTime dateTime;
+
+            if (args.Length >= 5)
+            {
+                name = args[0] ?? $"Name {(char)clientRandom.Next(128)}";
+                lastName = args[1] ?? $"Name {(char)clientRandom.Next(128)}";
+                deposit = (int?)Convert.ToInt32(args[2]) ?? clientRandom.Next(1000000);
+                percent = (double?)Convert.ToDouble(args[3]) ?? clientRandom.Next(10);
+                dateTime = (DateTime?)Convert.ToDateTime(args[4]) ?? DateRandomizer();
+            }
+            else
+            {
+                name = $"Name {(char)clientRandom.Next(128)}";
+                lastName = $"Name {(char)clientRandom.Next(128)}";
+                deposit = clientRandom.Next(1000000);
+                percent = clientRandom.Next(10);
+                dateTime = DateRandomizer();
+            }
+
+            switch (clientClassIndex)
+            {
+                case 0:
+                    newClient = new Common(name,
+                                         lastName,
+                                         deposit,
+                                         percent,
+                                         dateTime);
+                    break;
+                case 1:
+                    newClient = new Aristocrat(name,
+                                            lastName,
+                                            deposit,
+                                            percent,
+                                            dateTime);
+                    break;
+                default:
+                    newClient = new Royal(name,
+                                       lastName,
+                                       deposit,
+                                       percent,
+                                       dateTime);
+                    break;
+            }
+
+            Departments[0].Departments[clientClassIndex].Edit(oldClient, newClient);
+        }
 
         /// <summary>
         /// Method ot REMOVE Client

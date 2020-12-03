@@ -65,7 +65,8 @@ namespace Bank_System
             {
                 if ((TV_Departments?.SelectedItem as Department<Client>).Name != Bank.bankName)
                 {
-                    AddClientWindow AddClientWindow = new AddClientWindow(this, Bank.Departments[0].Departments.IndexOf(TV_Departments?.SelectedItem as Department<Client>));
+                    AddClientWindow AddClientWindow = new AddClientWindow(this, 
+                                                                          Bank.Departments[0].Departments.IndexOf(TV_Departments?.SelectedItem as Department<Client>));
                     AddClientWindow.Show();
                 }
             }
@@ -78,7 +79,16 @@ namespace Bank_System
         /// <param name="e"></param>
         private void BTN_Clients_EditClient(object sender, RoutedEventArgs e)
         {
-
+            if (TV_Departments.SelectedItem != null & LV_Clients.SelectedItem != null)
+            {
+                if ((TV_Departments?.SelectedItem as Department<Client>).Name != Bank.bankName)
+                {
+                    EditClientWindow EditClientWindow = new EditClientWindow(this, 
+                                                                             LV_Clients.SelectedItem as Client,
+                                                                             Bank.Departments[0].Departments.IndexOf(TV_Departments?.SelectedItem as Department<Client>));
+                    EditClientWindow.Show();
+                }
+            }
         }
 
         /// <summary>
