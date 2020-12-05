@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 namespace Bank_System
 {
     class Department<T> : ICollection<T>, IEnumerable<T>
+        where T : Client
     {
         public ObservableCollection<Department<Client>> Departments { get; set; } //Collection of inner Departments
 
@@ -67,6 +68,15 @@ namespace Bank_System
             }
         }
 
+        /// <summary>
+        /// Indexer by Client Data
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="lastName"></param>
+        /// <param name="deposit"></param>
+        /// <param name="percent"></param>
+        /// <param name="dateOfDeposit"></param>
+        /// <returns></returns>
         public Client this[string name, string lastName, int deposit, double percent, DateTime dateOfDeposit]
         {
             get
@@ -87,13 +97,16 @@ namespace Bank_System
 
         #endregion Indexers
 
+
+        #region Methods;
+
         /// <summary>
         /// Method to ADD new Item in this.Collection.Generic
         /// </summary>
         /// <param name="item"></param>
         public void Add(T item)
         {
-            if(size >= items.Length)
+            if (size >= items.Length)
                 ResizeArray();
 
             this.items[size] = item;
@@ -123,7 +136,7 @@ namespace Bank_System
 
             this.items = temp;
         }
-        
+
         /// <summary>
         /// Method to REMOVE Item from this.Collection.Generic
         /// </summary>
@@ -150,14 +163,54 @@ namespace Bank_System
             items[size] = default(T);
         }
 
+        /// <summary>
+        /// Method to EDIT Item in this.Collection.Generic
+        /// </summary>
+        /// <param name="oldItem"></param>
+        /// <param name="newItem"></param>
         public void Edit(T oldItem, T newItem)
         {
             for (int i = 0; i < size; i++)
             {
-                if (items[i].Equals(oldItem))                
-                    items[i] = newItem;                
+                if (items[i].Equals(oldItem))
+                    items[i] = newItem;
             }
+        } 
+
+        /// <summary>
+        /// Method to TRANSFER money between Clients
+        /// </summary>
+        /// <param name="fromClient"></param>
+        /// <param name="toClient"></param>
+        public void Transfer(Client fromClient, Client toClient)
+        {
+
         }
+
+        /// <summary>
+        /// Methd to FIND Client in this.Collection.Generic
+        /// </summary>
+        /// <param name="clientToFind"></param>
+        /// <returns></returns>
+        public Client Find(Client clientToFind)
+        {
+            Client defaultClient = default(T);
+
+            foreach(Client currentClient in items)
+            {
+                if (currentClient.Name == clientToFind.Name
+                && currentClient.LastName == clientToFind.LastName
+                && currentClient.Deposit == clientToFind.Deposit
+                && currentClient.Percent == clientToFind.Percent
+                && currentClient.Accumulation == clientToFind.Accumulation
+                && currentClient.DateOfDeposit == clientToFind.DateOfDeposit)
+                    defaultClient = currentClient;
+            }
+
+            return defaultClient;
+        }
+
+        #endregion Methods
 
         #region Interfaces;
 

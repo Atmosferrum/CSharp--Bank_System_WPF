@@ -21,9 +21,7 @@ namespace Bank_System
                    Deposit,
                    Percent,
                    DateOfDeposit)
-        {
-
-        }
+        { }
 
         #endregion Constructor
     }

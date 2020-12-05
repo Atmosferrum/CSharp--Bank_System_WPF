@@ -11,8 +11,6 @@ namespace Bank_System
     {
         public Silver(string Name)
                : base(Name)
-        {
-
-        }
+        { }
     }
 }

@@ -12,7 +12,6 @@ namespace Bank_System
     {
         public Bronze(string Name)
                : base(Name)
-        { }       
-      
+        { } 
     }
 }

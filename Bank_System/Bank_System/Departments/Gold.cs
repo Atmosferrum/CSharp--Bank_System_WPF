@@ -11,8 +11,6 @@ namespace Bank_System
     {
         public Gold(string Name)
                : base(Name)
-        {
-
-        }
+        { }
     }
 }

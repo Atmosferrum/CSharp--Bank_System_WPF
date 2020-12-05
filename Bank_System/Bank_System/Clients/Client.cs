@@ -1,17 +1,25 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bank_System
 {
     public class Client : IEquatable<Client>
     {
+        #region Fields;
+
+        private DateTime dateOfDeposit; //DateOfDeposit field
+
+        #endregion Fields
+
         #region Constructor;
 
+        /// <summary>
+        /// Constructor for Client
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <param name="LastName"></param>
+        /// <param name="Deposit"></param>
+        /// <param name="Percent"></param>
+        /// <param name="DateOfDeposit"></param>
         public Client(string Name,
                       string LastName,
                       int Deposit,
@@ -24,8 +32,6 @@ namespace Bank_System
             this.Percent = Percent;
             this.DateOfDeposit = DateOfDeposit;
             this.Status = this.GetType().Name;
-
-            Total();
         }
 
         #endregion Constructor
@@ -38,7 +44,12 @@ namespace Bank_System
         public int Deposit { get; set; } //Property to GET or SET Deposit
         public float Percent { get; set; } //Property to GET or SET Percent
         public float Accumulation { get; set; } //Property to GET or SET Accumulation
-        public DateTime DateOfDeposit { get; set; }
+
+        public DateTime DateOfDeposit //Department Property
+        {
+            get { return this.dateOfDeposit; }
+            set { this.dateOfDeposit = value; Total(); }
+        }
 
         #endregion Properties
 
@@ -51,8 +62,8 @@ namespace Bank_System
         /// <returns></returns>
         private int NumberOfMonths()
         {
-            return Math.Abs(DateTime.Now.Month - this.DateOfDeposit.Month)
-                           + 12 * (DateTime.Now.Year - this.DateOfDeposit.Year);
+            return Math.Abs(DateTime.Now.Month - this.dateOfDeposit.Month)
+                           + 12 * (DateTime.Now.Year - this.dateOfDeposit.Year);
         }
 
         /// <summary>
@@ -73,7 +84,7 @@ namespace Bank_System
                     total += midTotal;
                 }
 
-                this.Accumulation = (total - this.Deposit);
+                this.Accumulation = (float)Math.Round((total - this.Deposit) * 100) / 100;
             }
             else
             {
@@ -84,7 +95,7 @@ namespace Bank_System
                     total += ((float)this.Deposit / 100 * Percent);
                 }
 
-                this.Accumulation = total;
+                this.Accumulation = (float)Math.Round(total * 100) /100;
             }
         }
 
@@ -108,6 +119,5 @@ namespace Bank_System
         }
 
         #endregion Interfaces
-
     }
 }
