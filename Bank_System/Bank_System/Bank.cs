@@ -12,6 +12,8 @@ namespace Bank_System
     {
         public static ObservableCollection<Department<Client>> Departments = new ObservableCollection<Department<Client>>(); //Main Bank collection
 
+        private static Client defaultClient; //Default Client to Add/Edit
+
         public const string bankName = "Vivaldi Bank"; //Bank name
         public static readonly string[] departmentsNames = { "Common People Solutions", //Departments' names
                                                              "Aristocracy Solutions",
@@ -20,7 +22,7 @@ namespace Bank_System
         private const int bankSize = 21; //Default Clients quantity
         private static Random clientRandom = new Random(); //Random for Clients' data
 
-        private static DateTime startDate = new DateTime(1991, 1, 1); //Starting date for Depasits
+        private static DateTime startDate = new DateTime(2020, 1, 1); //Starting date for Depasits
         private static Random dateRandom = new Random(); //Random for Date
         private static int range = (DateTime.Today - startDate).Days; //Range for Date to choose
 
@@ -65,107 +67,84 @@ namespace Bank_System
         }
 
         /// <summary>
-        /// Method to add Client
+        /// Method to ADD Client
         /// </summary>
-        /// <param name="x">Index of Department</param>
-        public static void AddNewClient(int x, params string[] args)
+        /// <param name="clientClassIndex">Index of Department</param>
+        public static void AddNewClient(int clientClassIndex, params string[] args)
         {
-            string name;
-            string lastName;
-            int deposit;
-            double percent;
-            DateTime dateTime;
-
             if (args.Length >= 5)
-            {
-                name = args[0] ?? $"Name {(char)clientRandom.Next(128)}";
-                lastName = args[1] ?? $"Name {(char)clientRandom.Next(128)}";
-                deposit = (int?)Convert.ToInt32(args[2]) ?? clientRandom.Next(1000000);
-                percent = (double?)Convert.ToDouble(args[3]) ?? clientRandom.Next(10);
-                dateTime = (DateTime?)Convert.ToDateTime(args[4]) ?? DateRandomizer();
-            }
+                Departments[0].Departments[clientClassIndex].Add(ManageClient(clientClassIndex,
+                                                                              args[0],
+                                                                              args[1],
+                                                                              args[2],
+                                                                              args[3],
+                                                                              args[4]));
             else
-            {
-                name = $"Name {(char)clientRandom.Next(128)}";
-                lastName = $"Name {(char)clientRandom.Next(128)}";
-                deposit = clientRandom.Next(1000000);
-                percent = clientRandom.Next(10);
-                dateTime = DateRandomizer();
-            }
-
-            switch (x)
-            {
-                case 0:
-                    Departments[0].Departments[x].Add(new Common(name,
-                                                                 lastName,
-                                                                 deposit,
-                                                                 percent,
-                                                                 dateTime));
-                    break;
-                case 1:
-                    Departments[0].Departments[x].Add(new Aristocrat(name,
-                                                                     lastName,
-                                                                     deposit,
-                                                                     percent,
-                                                                     dateTime));
-                    break;
-                default:
-                    Departments[0].Departments[x].Add(new Royal(name,
-                                                                lastName,
-                                                                deposit,
-                                                                percent,
-                                                                dateTime));
-                    break;
-            }
+                Departments[0].Departments[clientClassIndex].Add(ManageClient(clientClassIndex,
+                                                                              $"Name {(char)clientRandom.Next(128)}",
+                                                                               $"Name {(char)clientRandom.Next(128)}",
+                                                                               Convert.ToString(clientRandom.Next(2_000)),
+                                                                               Convert.ToString(clientRandom.Next(1,6)),
+                                                                               Convert.ToString(DateRandomizer())));
         }
-
+        
+        /// <summary>
+        /// Method to EDIT Client
+        /// </summary>
+        /// <param name="oldClient">Client to EDIT</param>
+        /// <param name="clientClassIndex">Client class Index</param>
+        /// <param name="args">New Client Data</param>
         public static void EditClient(Client oldClient,
                                       int clientClassIndex,
                                       params string[] args)
         {
-            Client newClient;
+            Departments[0].Departments[clientClassIndex].Edit(oldClient,
+                                                              ManageClient(clientClassIndex,
+                                                                           args[0],
+                                                                           args[1],
+                                                                           args[2],
+                                                                           args[3],
+                                                                           args[4]));
+        }
 
+        /// <summary>
+        /// Method to CREATE new Clinet
+        /// </summary>
+        /// <param name="clientIndex"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        private static Client ManageClient(int clientIndex, params string[] args)
+        {
             string name;
             string lastName;
             int deposit;
-            double percent;
+            float percent;
             DateTime dateTime;
 
-            if (args.Length >= 5)
-            {
-                name = args[0] ?? $"Name {(char)clientRandom.Next(128)}";
-                lastName = args[1] ?? $"Name {(char)clientRandom.Next(128)}";
-                deposit = (int?)Convert.ToInt32(args[2]) ?? clientRandom.Next(1000000);
-                percent = (double?)Convert.ToDouble(args[3]) ?? clientRandom.Next(10);
-                dateTime = (DateTime?)Convert.ToDateTime(args[4]) ?? DateRandomizer();
-            }
-            else
-            {
-                name = $"Name {(char)clientRandom.Next(128)}";
-                lastName = $"Name {(char)clientRandom.Next(128)}";
-                deposit = clientRandom.Next(1000000);
-                percent = clientRandom.Next(10);
-                dateTime = DateRandomizer();
-            }
+            name = args[0] ?? $"Name {(char)clientRandom.Next(128)}";
+            lastName = args[1] ?? $"Name {(char)clientRandom.Next(128)}";
+            deposit = (int?)Convert.ToInt32(args[2]) ?? clientRandom.Next(2_000);
+            percent = (float?)Convert.ToDouble(args[3]) ?? clientRandom.Next(10);
+            dateTime = (DateTime?)Convert.ToDateTime(args[4]) ?? DateRandomizer();
 
-            switch (clientClassIndex)
+            switch (clientIndex)
             {
                 case 0:
-                    newClient = new Common(name,
+                    defaultClient = new Common(name,
                                          lastName,
                                          deposit,
                                          percent,
                                          dateTime);
                     break;
                 case 1:
-                    newClient = new Aristocrat(name,
+                    defaultClient = new Aristocrat(name,
                                             lastName,
                                             deposit,
                                             percent,
                                             dateTime);
                     break;
                 default:
-                    newClient = new Royal(name,
+                    defaultClient = new Royal(name,
                                        lastName,
                                        deposit,
                                        percent,
@@ -173,7 +152,7 @@ namespace Bank_System
                     break;
             }
 
-            Departments[0].Departments[clientClassIndex].Edit(oldClient, newClient);
+            return defaultClient;
         }
 
         /// <summary>

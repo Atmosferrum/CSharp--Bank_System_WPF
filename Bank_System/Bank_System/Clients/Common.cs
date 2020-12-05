@@ -14,7 +14,7 @@ namespace Bank_System
         public Common(string Name,
                       string LastName,
                       int Deposit,
-                      double Percent,
+                      float Percent,
                       DateTime DateOfDeposit)
             : base(Name,
                    LastName,

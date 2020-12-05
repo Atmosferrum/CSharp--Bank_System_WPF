@@ -43,6 +43,12 @@ namespace Bank_System.Windows
             this.mainWindow = mainWindow;
             this.client = client;
             this.clientClassIndex = clientClassIndex;
+
+            TB_EditClientDeposit.Text = Convert.ToString(client.Deposit);
+            TB_EditClientName.Text = client.Name;
+            TB_EditClientLastName.Text = client.LastName;
+            TB_EditClientPercent.Text = Convert.ToString(client.Percent);
+            DP_EditClientDateOfDeposit.Text = Convert.ToString(client.DateOfDeposit);
         }
 
         private void BTN_Clients_EditClient(object sender, RoutedEventArgs e)

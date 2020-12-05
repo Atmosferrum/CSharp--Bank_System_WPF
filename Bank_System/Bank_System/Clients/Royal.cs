@@ -14,7 +14,7 @@ namespace Bank_System
         public Royal(string Name,
                      string LastName,
                      int Deposit,
-                     double Percent,
+                     float Percent,
                      DateTime DateOfDeposit)
             : base(Name,
                    LastName,
