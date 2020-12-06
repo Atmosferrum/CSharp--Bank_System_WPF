@@ -2,11 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bank_System
 {
@@ -177,14 +173,16 @@ namespace Bank_System
             }
         } 
 
-        /// <summary>
-        /// Method to TRANSFER money between Clients
-        /// </summary>
-        /// <param name="fromClient"></param>
-        /// <param name="toClient"></param>
-        public void Transfer(Client fromClient, Client toClient)
+       /// <summary>
+       /// Method to TRANSFER money between given Clients
+       /// </summary>
+       /// <param name="fromClient">Client taht GIVES Transfer</param>
+       /// <param name="toClient">Client that TAKES Transfer</param>
+       /// <param name="amount">Amlount of Transfer</param>
+        public void Transfer(Client fromClient, Client toClient, float amount)
         {
-
+            fromClient.Balance -= amount;
+            toClient.Balance += amount;
         }
 
         /// <summary>

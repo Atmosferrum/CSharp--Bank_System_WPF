@@ -44,11 +44,12 @@ namespace Bank_System
         public int Deposit { get; set; } //Property to GET or SET Deposit
         public float Percent { get; set; } //Property to GET or SET Percent
         public float Accumulation { get; set; } //Property to GET or SET Accumulation
+        public float Balance { get; set; } //Property to GET or SET Total Client's Balance
 
         public DateTime DateOfDeposit //Department Property
         {
             get { return this.dateOfDeposit; }
-            set { this.dateOfDeposit = value; Total(); }
+            set { this.dateOfDeposit = value; CountAccumulation(); }
         }
 
         #endregion Properties
@@ -69,7 +70,7 @@ namespace Bank_System
         /// <summary>
         /// Methodto COUNT Acummulation
         /// </summary>
-        private void Total()
+        private void CountAccumulation()
         {
             if (this.Deposit >= 1_000)
             {
@@ -97,6 +98,13 @@ namespace Bank_System
 
                 this.Accumulation = (float)Math.Round(total * 100) /100;
             }
+
+            CountBalance();
+        }
+
+        private void CountBalance()
+        {
+            this.Balance = this.Deposit + this.Accumulation;
         }
 
         #endregion Methods
