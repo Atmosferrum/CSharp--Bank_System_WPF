@@ -9,6 +9,12 @@ namespace Bank_System
 
         private static Client defaultClient; //Default Client to Add/Edit
 
+        public const float minPercent = 0.1f;
+        public const float maxPercent = 9.9f;
+
+        public const int minDeposit = 1;
+        public const int maxDeposit = 1_000_000;
+
         public const string bankName = "Vivaldi Bank"; //Bank name
         public static readonly string[] departmentsNames = { "Common People Solutions", //Departments' names
                                                              "Aristocracy Solutions",

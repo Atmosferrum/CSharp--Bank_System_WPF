@@ -23,17 +23,41 @@ namespace Bank_System.Windows
         private Client client;
         private int clientClassIndex;
 
-        private bool inputDataIsCorrect => TB_EditClientName.Text != ""  //Bool to CHECK if input Data is correct
-                                        && TB_EditClientLastName.Text != ""
-                                        && Int32.TryParse(TB_EditClientDeposit.Text, out deposit)
-                                        && Double.TryParse(TB_EditClientPercent.Text, out percent)
-                                        && DateTime.TryParse(DP_EditClientDateOfDeposit.Text, out dateOfDeposit);
+        private int deposit; //Variable to get PARSED Deposit Data
 
-        private int deposit; //Variable to get PARSED deposit
-        private double percent; //Variable to get PARSED percent
+        private double percent; //Variable to get PARSED Percent Data
+
         private DateTime dateOfDeposit; //Variable to get PARSED date of deposit
 
+        private bool parsedDeposit => Int32.TryParse(TB_EditClientDeposit.Text, out deposit); //Bool to PARSE Deposit Data
 
+        private bool parsedPercent => Double.TryParse(TB_EditClientPercent.Text, out percent); //Bool to PARSE Percent Data
+
+        private bool parsedDate => DateTime.TryParse(DP_EditClientDateOfDeposit.Text, out dateOfDeposit); //Bool to PARSE Date Data
+
+        private bool depositIsValid => parsedDeposit //Bool to CHECK if Deposit Data is correct
+                                    && deposit >= Bank.minDeposit
+                                    && deposit <= Bank.maxDeposit;
+
+        private bool percentIsValid => parsedPercent //Bool to CHECK if Percent Data is correct
+                                    && percent >= Bank.minPercent
+                                    && percent <= Bank.maxPercent;
+
+        private bool dateIsValid => parsedDate //Bool to CHECK if Date Data is correct
+                                 && dateOfDeposit <= DateTime.Now;
+
+        private bool inputDataIsCorrect => TB_EditClientName.Text != ""  //Bool to CHECK if input Data is correct
+                                        && TB_EditClientLastName.Text != ""
+                                        && depositIsValid
+                                        && percentIsValid
+                                        && dateIsValid;
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="mainWindow">MainWindow</param>
+        /// <param name="client">Client to EDIT reference</param>
+        /// <param name="clientClassIndex">Client Class</param>
         public EditClientWindow(MainWindow mainWindow,
                                 Client client,
                                 int clientClassIndex)
@@ -51,6 +75,11 @@ namespace Bank_System.Windows
             DP_EditClientDateOfDeposit.Text = Convert.ToString(client.DateOfDeposit);
         }
 
+        /// <summary>
+        /// Button Method to EDIT Client
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BTN_Clients_EditClient(object sender, RoutedEventArgs e)
         {
             if (inputDataIsCorrect)

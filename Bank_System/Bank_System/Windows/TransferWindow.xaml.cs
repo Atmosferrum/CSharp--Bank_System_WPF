@@ -13,17 +13,22 @@ namespace Bank_System.Windows
         private Client fromClient; //Client to Transfer from
         private int clientClassIndex; //Client index to GET its Department
 
-        private bool inputDataIsCorrect => CB_ToClient.SelectedIndex > -1  //Bool to CHECK if input Data is correct
-                                        && float.TryParse(TB_AmountToTransfer.Text, out Amount)
-                                        && TB_AmountToTransfer.Text != null
-                                        && TB_AmountToTransfer.Text != ""
-                                        && Amount < From;
-
         private float Amount; //Amount to TRANSSFER
         private float From; //Deposit FROM wich will GIVE Transfer
         private float FromResult; //Result for Client wich GIVES Transfer
         private float To; //Deposit TO wich will GET transfer
         private float ToResult; //Result for Client wich GETS Transfer
+
+        private bool parsedAmount => float.TryParse(TB_AmountToTransfer.Text, out Amount); //Bool to PARSE Amount
+
+        private bool amountIsValid => parsedAmount //Bool to CHECK if Amount Data is correct
+                                   && Amount > 0
+                                   && Amount <= From;
+
+        private bool inputDataIsCorrect => CB_ToClient.SelectedIndex > -1  //Bool to CHECK if input Data is correct
+                                        && amountIsValid;
+                                        //&& TB_AmountToTransfer.Text != null
+                                        //&& TB_AmountToTransfer.Text != "";
 
         private Department<Client> allClients = new Department<Client>("Temp"); //List of ALL Clients for ComboBox
 
@@ -123,11 +128,11 @@ namespace Bank_System.Windows
         /// </summary>
         private void ShowResults()
         {
-            if (float.TryParse(TB_AmountToTransfer.Text, out Amount)
-              && Amount < From)
+            if (inputDataIsCorrect)
             {
                 FromResult = From - Amount;
                 ToResult = To + Amount;
+                TB_AmountResult.Text = $"{From} - {Amount} = {FromResult} -> {To} + {Amount} = {ToResult}";
             }
             else
             {
@@ -135,9 +140,9 @@ namespace Bank_System.Windows
                 $"{TransferWindow.TitleProperty.Name}",
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
-            }
 
-            TB_AmountResult.Text = $"{From} - {Amount} = {FromResult} -> {To} + {Amount} = {ToResult}";
+                TB_AmountResult.Text = "";
+            }            
         }
 
         /// <summary>

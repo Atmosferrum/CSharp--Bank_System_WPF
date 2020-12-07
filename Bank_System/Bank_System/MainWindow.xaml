@@ -42,7 +42,11 @@
                         </HierarchicalDataTemplate>
                     </TreeView.ItemTemplate>
                 </TreeView>
-
+                <TextBlock>Min. Deposit = 1 $
+                    <LineBreak/>Max. Deposit = 1 000 000 $
+                    <LineBreak/>Min. Percent = 0.1 %
+                    <LineBreak/>Max. Percent = 9.9 %
+                </TextBlock>
             </StackPanel>
         </ScrollViewer>
 

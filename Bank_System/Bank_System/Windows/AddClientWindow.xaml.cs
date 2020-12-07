@@ -11,13 +11,26 @@ namespace Bank_System.Windows
         private int clientClassIndex; //Calss index for new Client
         private MainWindow mainWindow; //MainWindow reference
 
-        private bool inputDataIsCorrect => TB_AddClientName.Text != ""  //Bool to CHECK if input Data is correct
-                                        && TB_AddClientLastName.Text != ""                       
-                                        && Int32.TryParse(TB_AddClientDeposit.Text, out deposit)
-                                        && Double.TryParse(TB_AddClientPercent.Text, out percent);
-
         private int deposit; //Variable to get PARSED Deposit Data
+
         private double percent; //Variable to get PARSED Percent Data
+
+        private bool parsedDeposit => Int32.TryParse(TB_AddClientDeposit.Text, out deposit); //Bool to PARSE Deposit Data
+
+        private bool parsedPercent => Double.TryParse(TB_AddClientPercent.Text, out percent); //Bool to PARSE Percent Data
+
+        private bool depositIsValid => parsedDeposit //Bool to CHECK if Deposit Data is correct
+                                    && deposit >= Bank.minDeposit
+                                    && deposit <= Bank.maxDeposit;
+
+        private bool percentIsValid => parsedPercent //Bool to CHECK if Percent Data is correct
+                                    && percent >= Bank.minPercent
+                                    && percent <= Bank.maxPercent;
+
+        private bool inputDataIsCorrect => TB_AddClientName.Text != ""  //Bool to CHECK if input Data is correct
+                                        && TB_AddClientLastName.Text != ""
+                                        && depositIsValid
+                                        && percentIsValid;
 
         #region Constructor;
 
